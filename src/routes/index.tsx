@@ -121,12 +121,12 @@ function CategoryCard({
   description: string;
   preview: string[];
 }) {
-  const bg = tone === "sage" ? "oklch(0.94_0.04_150)" : "oklch(0.94_0.05_45)";
+  const bg = tone === "sage" ? "oklch(0.94 0.04 150)" : "oklch(0.94 0.05 45)";
   return (
     <Link
       to={to}
       className="group relative overflow-hidden rounded-2xl border border-border p-8 transition-all hover:-translate-y-1 hover:shadow-xl"
-      style={{ backgroundColor: `var(--tw, ${bg})`, background: bg.replace(/_/g, " ").startsWith("oklch") ? `oklch(${bg.split("oklch(")[1]}`.replace(/_/g, " ") : undefined }}
+      style={{ backgroundColor: bg }}
     >
       <div className="flex items-start justify-between">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/70 text-foreground">

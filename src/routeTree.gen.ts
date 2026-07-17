@@ -9,8 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RobustRouteImport } from './routes/robust'
+import { Route as CompactRouteImport } from './routes/compact'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RobustRoute = RobustRouteImport.update({
+  id: '/robust',
+  path: '/robust',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompactRoute = CompactRouteImport.update({
+  id: '/compact',
+  path: '/compact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +31,50 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compact': typeof CompactRoute
+  '/robust': typeof RobustRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compact': typeof CompactRoute
+  '/robust': typeof RobustRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compact': typeof CompactRoute
+  '/robust': typeof RobustRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/compact' | '/robust'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/compact' | '/robust'
+  id: '__root__' | '/' | '/compact' | '/robust'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompactRoute: typeof CompactRoute
+  RobustRoute: typeof RobustRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/robust': {
+      id: '/robust'
+      path: '/robust'
+      fullPath: '/robust'
+      preLoaderRoute: typeof RobustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compact': {
+      id: '/compact'
+      path: '/compact'
+      fullPath: '/compact'
+      preLoaderRoute: typeof CompactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompactRoute: CompactRoute,
+  RobustRoute: RobustRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
