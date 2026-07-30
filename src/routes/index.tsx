@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Compass, Mountain } from "lucide-react";
+import { ArrowRight, Compass, Mountain, MessageCircle } from "lucide-react";
 import { PageShell } from "@/components/SiteChrome";
 import heroImg from "@/assets/hero-stroller.jpg";
 import { compactStrollers, robustStrollers } from "@/data/strollers";
@@ -7,17 +7,17 @@ import { compactStrollers, robustStrollers } from "@/data/strollers";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Rollwise — Best Baby Strollers of 2026, Ranked" },
+      { title: "Happyfam — Os Melhores Carrinhos de Bebê de 2026, Classificados" },
       {
         name: "description",
         content:
-          "Independent rankings of the 10 best compact strollers and 10 most robust all-terrain strollers. Compare price, weight, and features.",
+          "Rankings independentes dos 10 melhores carrinhos compactos e dos 10 mais robustos para todo tipo de terreno. Compare preço, peso e recursos.",
       },
-      { property: "og:title", content: "Rollwise — Best Baby Strollers, Ranked" },
+      { property: "og:title", content: "Happyfam — Os Melhores Carrinhos de Bebê, Classificados" },
       {
         property: "og:description",
         content:
-          "The 10 best compact strollers and 10 most robust all-terrain strollers, reviewed.",
+          "Os 10 melhores carrinhos compactos e os 10 mais robustos para todo tipo de terreno, avaliados.",
       },
     ],
   }),
@@ -32,29 +32,26 @@ function Home() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-3 py-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-              Stroller guides · 2026
+              Guia de carrinhos de bebê · 2026
             </p>
             <h1 className="mt-6 font-serif text-5xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-              Push with{" "}
-              <span className="italic text-[oklch(0.45_0.08_150)]">confidence.</span>
+              Ande com{" "}
+              <span className="italic text-[oklch(0.45_0.08_150)]">confiança.</span>
             </h1>
             <p className="mt-5 max-w-lg text-lg text-muted-foreground">
-              We test, compare, and rank strollers so you don't have to. Two definitive lists —
-              compact and robust — updated for real families.
+              Testamos, comparamos e classificamos carrinhos para que você não precise. Duas
+              listas definitivas — compacto e robusto — atualizadas para famílias reais.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/compact"
+              <a
+                href="https://enxovalinteligente.com.br/grupodescontoswa"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
               >
-                Top 10 Compact <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/robust"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-              >
-                Top 10 Robust <ArrowRight className="h-4 w-4" />
-              </Link>
+                <MessageCircle className="h-4 w-4" />
+                Entre no grupo de descontos
+              </a>
             </div>
           </div>
           <div className="relative">
@@ -77,27 +74,25 @@ function Home() {
             to="/compact"
             tone="sage"
             icon={<Compass className="h-6 w-6" />}
-            eyebrow="Category 01"
-            title="The 10 Best Compact Strollers"
-            description="Lightweight, one-hand folds and cabin-friendly frames for city and travel days."
+            title="Os 10 Melhores Carrinhos Compactos"
+            description="Estruturas leves, dobráveis com uma mão e aprovadas para cabine, ideais para o dia a dia na cidade e viagens."
             preview={compactStrollers.slice(0, 3).map((s) => s.name)}
           />
           <CategoryCard
             to="/robust"
             tone="clay"
             icon={<Mountain className="h-6 w-6" />}
-            eyebrow="Category 02"
-            title="The 10 Most Robust Strollers"
-            description="All-terrain wheels, plush suspension, and full-size frames for real-world use."
+            title="Os 10 Melhores Carrinhos Robustos"
+            description="Rodas para todo tipo de terreno, suspensão macia e estrutura para uso em espaços grandes no dia a dia."
             preview={robustStrollers.slice(0, 3).map((s) => s.name)}
           />
         </div>
 
         {/* Trust strip */}
         <div className="mt-16 grid gap-8 rounded-2xl border border-border bg-card p-8 md:grid-cols-3">
-          <Stat number="120+" label="Hours of hands-on testing" />
-          <Stat number="42" label="Strollers evaluated this year" />
-          <Stat number="0" label="Sponsored placements — ever" />
+          <Stat number="120+" label="Horas de testes práticos" />
+          <Stat number="42" label="Carrinhos avaliados este ano" />
+          <Stat number="0" label="Posicionamentos patrocinados — nunca" />
         </div>
       </section>
     </PageShell>
@@ -108,7 +103,6 @@ function CategoryCard({
   to,
   tone,
   icon,
-  eyebrow,
   title,
   description,
   preview,
@@ -116,7 +110,6 @@ function CategoryCard({
   to: "/compact" | "/robust";
   tone: "sage" | "clay";
   icon: React.ReactNode;
-  eyebrow: string;
   title: string;
   description: string;
   preview: string[];
@@ -128,11 +121,8 @@ function CategoryCard({
       className="group relative overflow-hidden rounded-2xl border border-border p-8 transition-all hover:-translate-y-1 hover:shadow-xl"
       style={{ backgroundColor: bg }}
     >
-      <div className="flex items-start justify-between">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/70 text-foreground">
-          {icon}
-        </div>
-        <p className="text-xs uppercase tracking-[0.16em] text-foreground/60">{eyebrow}</p>
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/70 text-foreground">
+        {icon}
       </div>
       <h2 className="mt-6 font-serif text-3xl font-semibold tracking-tight text-foreground">
         {title}
@@ -148,11 +138,11 @@ function CategoryCard({
           </li>
         ))}
         <li className="rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-foreground/80">
-          + 7 more
+          + mais 7
         </li>
       </ul>
       <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground">
-        See the ranking
+        Ver o ranking
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
     </Link>

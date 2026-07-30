@@ -9,13 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RobustRouteImport } from './routes/robust'
-import { Route as CompactRouteImport } from './routes/compact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CompactRouteImport } from './routes/compact'
+import { Route as DiscountsRouteImport } from './routes/discounts'
+import { Route as RobustRouteImport } from './routes/robust'
+import { Route as TipsRouteImport } from './routes/tips'
+import { Route as TipsIndexRouteImport } from './routes/tips.index'
+import { Route as TipsSlugRouteImport } from './routes/tips.$slug'
 
-const RobustRoute = RobustRouteImport.update({
-  id: '/robust',
-  path: '/robust',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompactRoute = CompactRouteImport.update({
@@ -23,49 +33,117 @@ const CompactRoute = CompactRouteImport.update({
   path: '/compact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const DiscountsRoute = DiscountsRouteImport.update({
+  id: '/discounts',
+  path: '/discounts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobustRoute = RobustRouteImport.update({
+  id: '/robust',
+  path: '/robust',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TipsRoute = TipsRouteImport.update({
+  id: '/tips',
+  path: '/tips',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TipsIndexRoute = TipsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => TipsRoute,
+} as any)
+const TipsSlugRoute = TipsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TipsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/compact': typeof CompactRoute
+  '/discounts': typeof DiscountsRoute
   '/robust': typeof RobustRoute
+  '/tips': typeof TipsRouteWithChildren
+  '/tips/$slug': typeof TipsSlugRoute
+  '/tips/': typeof TipsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/compact': typeof CompactRoute
+  '/discounts': typeof DiscountsRoute
   '/robust': typeof RobustRoute
+  '/tips/$slug': typeof TipsSlugRoute
+  '/tips': typeof TipsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/compact': typeof CompactRoute
+  '/discounts': typeof DiscountsRoute
   '/robust': typeof RobustRoute
+  '/tips': typeof TipsRouteWithChildren
+  '/tips/$slug': typeof TipsSlugRoute
+  '/tips/': typeof TipsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compact' | '/robust'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/compact'
+    | '/discounts'
+    | '/robust'
+    | '/tips'
+    | '/tips/$slug'
+    | '/tips/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compact' | '/robust'
-  id: '__root__' | '/' | '/compact' | '/robust'
+  to:
+    | '/'
+    | '/about'
+    | '/compact'
+    | '/discounts'
+    | '/robust'
+    | '/tips/$slug'
+    | '/tips'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/compact'
+    | '/discounts'
+    | '/robust'
+    | '/tips'
+    | '/tips/$slug'
+    | '/tips/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CompactRoute: typeof CompactRoute
+  DiscountsRoute: typeof DiscountsRoute
   RobustRoute: typeof RobustRoute
+  TipsRoute: typeof TipsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/robust': {
-      id: '/robust'
-      path: '/robust'
-      fullPath: '/robust'
-      preLoaderRoute: typeof RobustRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compact': {
@@ -75,21 +153,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/discounts': {
+      id: '/discounts'
+      path: '/discounts'
+      fullPath: '/discounts'
+      preLoaderRoute: typeof DiscountsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/robust': {
+      id: '/robust'
+      path: '/robust'
+      fullPath: '/robust'
+      preLoaderRoute: typeof RobustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tips': {
+      id: '/tips'
+      path: '/tips'
+      fullPath: '/tips'
+      preLoaderRoute: typeof TipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tips/': {
+      id: '/tips/'
+      path: '/'
+      fullPath: '/tips/'
+      preLoaderRoute: typeof TipsIndexRouteImport
+      parentRoute: typeof TipsRoute
+    }
+    '/tips/$slug': {
+      id: '/tips/$slug'
+      path: '/$slug'
+      fullPath: '/tips/$slug'
+      preLoaderRoute: typeof TipsSlugRouteImport
+      parentRoute: typeof TipsRoute
     }
   }
 }
 
+interface TipsRouteChildren {
+  TipsSlugRoute: typeof TipsSlugRoute
+  TipsIndexRoute: typeof TipsIndexRoute
+}
+
+const TipsRouteChildren: TipsRouteChildren = {
+  TipsSlugRoute: TipsSlugRoute,
+  TipsIndexRoute: TipsIndexRoute,
+}
+
+const TipsRouteWithChildren = TipsRoute._addFileChildren(TipsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CompactRoute: CompactRoute,
+  DiscountsRoute: DiscountsRoute,
   RobustRoute: RobustRoute,
+  TipsRoute: TipsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

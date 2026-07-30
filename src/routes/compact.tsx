@@ -6,16 +6,16 @@ import { compactStrollers } from "@/data/strollers";
 export const Route = createFileRoute("/compact")({
   head: () => ({
     meta: [
-      { title: "10 Best Compact Strollers of 2026 — Rollwise" },
+      { title: "Os 10 Melhores Carrinhos Compactos de 2026 — Happyfam" },
       {
         name: "description",
         content:
-          "Our ranking of the 10 best compact and travel strollers: cabin-friendly folds, ultralight frames, and one-hand collapse designs.",
+          "Nosso ranking dos 10 melhores carrinhos compactos e de viagem: dobras aprovadas para cabine, estruturas ultraleves e design de fechamento com uma mão.",
       },
-      { property: "og:title", content: "10 Best Compact Strollers of 2026" },
+      { property: "og:title", content: "Os 10 Melhores Carrinhos Compactos de 2026" },
       {
         property: "og:description",
-        content: "Ultralight, cabin-friendly strollers ranked for city and travel families.",
+        content: "Carrinhos ultraleves e aprovados para cabine, classificados para famílias urbanas e viajantes.",
       },
     ],
   }),
@@ -27,14 +27,14 @@ function CompactPage() {
     <PageShell>
       <section className="mx-auto max-w-4xl px-6 pt-16 pb-8">
         <p className="text-xs font-medium uppercase tracking-[0.16em] text-[oklch(0.45_0.08_150)]">
-          Category 01 · Compact
+          Categoria 01 · Compacto
         </p>
         <h1 className="mt-4 font-serif text-5xl font-semibold leading-tight tracking-tight text-foreground md:text-6xl">
-          The 10 Best Compact Strollers
+          Os 10 Melhores Carrinhos Compactos
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-          Ultralight frames, cabin-approved folds, and one-hand collapses — ranked for city
-          commutes and long-haul travel days. Prices and weights verified for 2026.
+          Estruturas ultraleves, tamanho aprovado para a cabine do avião (consulte sempre a companhia
+          aérea para confirmar) e fechamento com uma mão — ideais para deslocamentos na cidade e viagens.
         </p>
       </section>
 
