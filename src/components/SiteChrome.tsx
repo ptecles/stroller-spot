@@ -4,41 +4,41 @@ import type { ReactNode } from "react";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-6xl items-center gap-4 px-6 py-4">
+        <Link to="/" className="flex shrink-0 items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground text-background font-serif text-lg">
             h
           </span>
           <span className="font-serif text-lg font-semibold tracking-tight">Happyfam</span>
         </Link>
-        <nav className="flex items-center gap-1 text-sm sm:gap-6">
+        <nav className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-sm [-ms-overflow-style:none] [scrollbar-width:none] sm:justify-end sm:gap-6 [&::-webkit-scrollbar]:hidden">
           <Link
             to="/compact"
-            className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
           >
             Compactos
           </Link>
           <Link
             to="/robust"
-            className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
           >
             Robustos
           </Link>
           <Link
             to="/discounts"
-            className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
           >
             Descontos
           </Link>
           <Link
             to="/tips"
-            className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
           >
             Dicas
           </Link>
           <Link
             to="/about"
-            className="hidden rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground sm:inline"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-foreground"
           >
             Sobre
           </Link>
